@@ -17,7 +17,7 @@ height=600
 
 #############-------Classes------##############
 
-class square(pygame.sprite.Sprite):
+class Square(pygame.sprite.Sprite):
     def _init_(self, Quadrado_imagem, pos_x, pos_y):
         pygame.sprite.Sprite._init_(self)
         #self.x = pos_x
@@ -54,7 +54,7 @@ class square(pygame.sprite.Sprite):
     def moveRight(self):
         self.moveX(self.steps)
 
-class bolinha_assassina(pygame.sprite.Sprite):
+class Bolinha_assassina(pygame.sprite.Sprite):
     def _init_(self, bolinha_imagem, pos_x2, pos_y2, vel_y):
         pygame.sprite.Sprite._init_(self)
         
@@ -86,18 +86,18 @@ class Paredes(pygame.sprite.Sprite):
 pygame.init()
 tela = pygame.display.set_mode((800, 600), 0, 32)
 
-pygame.display.set_caption('JOGO')
+pygame.display.set_caption('Jogo mais difícil do mundo')
 
 # carrega imagem de fundo 
-fundo = pygame.image.load("fundo-800X600.jpg").convert()
+fundo = pygame.image.load("fundo.png").convert()
 
 # cria quadrado 
-quadrado = square("quadrado-vermelho-25X25.png", 100, 300)
+quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
 quadrado_group = pygame.sprite.Group()
 quadrado_group.add(quadrado)
 
 # cria bolinha
-bola = bolinha_assassina("bola-20X20.png", 500, 500, 1)
+bola = Bolinha_assassina("bola-20X20.png", 500, 500, 1)
 #bola2 = bolinha_assassina2("bola-20X20.png", 700, 200, randrange(-1, 1))
 
 bola_group = pygame.sprite.Group()
@@ -152,7 +152,7 @@ while rodando:
     
     
   #if quadrado.colliderect(bola):
-      #quadrado = square("quadrado-vermelho-25X25.png", 100, 300)
+      #quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
     
 
 

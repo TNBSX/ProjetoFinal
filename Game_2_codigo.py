@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May  4 07:46:37 2018
+Created on Thu May 10 17:22:01 2018
 
 @author: tiago
 """
@@ -17,9 +17,9 @@ height=600
 
 #############-------Classes------##############
 
-class Square(pygame.sprite.Sprite):
-    def _init_(self, Quadrado_imagem, pos_x, pos_y):
-        pygame.sprite.Sprite._init_(self)
+class square(pygame.sprite.Sprite):
+    def __init__(self, Quadrado_imagem, pos_x, pos_y):
+        pygame.sprite.Sprite.__init__(self)
         #self.x = pos_x
         #self.y = pos_y
         self.image = pygame.image.load(Quadrado_imagem)
@@ -32,15 +32,16 @@ class Square(pygame.sprite.Sprite):
     def moveY(self, pixel):
         if self.rect.y >= 1 or pixel > 0:
             self.rect.y += pixel
-        elif self.rect.y <= 400 or pixel < 0:   #NAO FUNCIONA
-            self.rect.y -= pixel  #NAO FUNCIONA
+        #elif self.rect.y <= 400 or pixel < 0:   #NAO FUNCIONA
+        #    self.rect.y -= pixel  #NAO FUNCIONA
+
+            
 
     def moveX(self, pixel2):
         if self.rect.x >= 1 or pixel2 > 0:
             self.rect.x += pixel2
-        elif self.rect.x <= 799 or pixel2 > 0:  #NAO FUNCIONA
-            self.rect.x -= pixel2   #NAO FUNCIONA
-            
+        #elif self.rect.x <= 799 or pixel2 > 0:  #NAO FUNCIONA
+        #    self.rect.x -= pixel2   #NAO FUNCIONA
 
     def moveDown(self):
         self.moveY(self.steps)
@@ -53,10 +54,15 @@ class Square(pygame.sprite.Sprite):
     
     def moveRight(self):
         self.moveX(self.steps)
-
-class Bolinha_assassina(pygame.sprite.Sprite):
-    def _init_(self, bolinha_imagem, pos_x2, pos_y2, vel_y):
-        pygame.sprite.Sprite._init_(self)
+        
+    #def checkCollision(self, sprite1, sprite2):
+        #col = pygame.sprite.collide_rect(sprite1, sprite2)
+        #if col == True:
+            #sys.exit()
+            
+class bolinha_assassina(pygame.sprite.Sprite):
+    def __init__(self, bolinha_imagem, pos_x2, pos_y2, vel_y):
+        pygame.sprite.Sprite.__init__(self)
         
         self.vy = vel_y
         self.image = pygame.image.load(bolinha_imagem)
@@ -69,10 +75,9 @@ class Bolinha_assassina(pygame.sprite.Sprite):
         self.rect.y += self.vy
 
 
-
 class Paredes(pygame.sprite.Sprite):
-    def _init_(self, x, y, width, height):
-        super()._init_()
+    def __init__(self, x, y, width, height):
+        super().__init__()
         self.image = pygame.Surface([width, height])
         self.image.fill(BLUE)
  
@@ -86,18 +91,18 @@ class Paredes(pygame.sprite.Sprite):
 pygame.init()
 tela = pygame.display.set_mode((800, 600), 0, 32)
 
-pygame.display.set_caption('Jogo mais difícil do mundo')
+pygame.display.set_caption('JOGO')
 
 # carrega imagem de fundo 
-fundo = pygame.image.load("fundo.png").convert()
+fundo = pygame.image.load("fundo-800X600.jpg").convert()
 
 # cria quadrado 
-quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+quadrado = square("quadrado-vermelho-25X25.png", 100, 300)
 quadrado_group = pygame.sprite.Group()
 quadrado_group.add(quadrado)
 
 # cria bolinha
-bola = Bolinha_assassina("bola-20X20.png", 500, 500, 1)
+bola = bolinha_assassina("bola-20X20.png", 500, 500, 1)
 #bola2 = bolinha_assassina2("bola-20X20.png", 700, 200, randrange(-1, 1))
 
 bola_group = pygame.sprite.Group()
@@ -131,7 +136,14 @@ while rodando:
   for event in pygame.event.get():  #pega lista de eventos
     if event.type == pygame.QUIT:      #verifica se um dos eventso é QUIT (janela fechou)
       rodando = False            #executa a função de sistema "exit"
-    
+      
+  if pygame.sprite.collide_rect(quadrado,bola):
+     quadrado = square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado_group = pygame.sprite.Group()
+     quadrado_group.add(quadrado)
+     
+  #if pygame.sprite.collide_rect(quadrado, parede):
+      #quadrado = square("quadrado-vermelho-25X25.png", pos_x, pos_y)
     
   #move o quadrado pela tela
   pressed_keys = pygame.key.get_pressed() #pega teclas pressionadas
@@ -142,29 +154,18 @@ while rodando:
   elif pressed_keys[K_LEFT]:
       quadrado.moveLeft()
   elif pressed_keys[K_RIGHT]:
-      quadrado.moveRight()
+      quadrado.moveRight() 
 
        
 #move a bolinha
   bola.move3()
   if bola.rect.y < 0 or bola.rect.y > 600:
     bola.vy = - bola.vy  
-    
-    
-  #if quadrado.colliderect(bola):
-      #quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
-    
-
-
-    
-    
+   
 
   #bola2.move4()
   #if bola.rect.x < 0 or bola.rect.x > 800:
   #    bola.vx = -bola.vx
-      
-  if pygame.sprite.collide_rect(quadrado, bola):
-      quadrado_group.draw(tela)
 
 
   #gera saídas
@@ -175,4 +176,4 @@ while rodando:
   #bola2_group.draw(tela)
   pygame.display.update()     #coloca a tela na janela
 
-pygame.display.quit() 
+pygame.display.quit()

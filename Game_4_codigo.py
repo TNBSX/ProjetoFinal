@@ -114,7 +114,7 @@ zona_group = pygame.sprite.Group()
 #zona = Zona_segura(10, 200, 150, 200)
 #zona_group.add(zona)
 
-zona = Zona_segura(700, 200, 100, 200)
+zona = Zona_segura(690, 200, 100, 200)
 zona_group.add(zona)
 
 # cria quadrado 

@@ -14,7 +14,7 @@ GREEN = (0, 200, 0)
 BLUE = (50, 50, 255)
 width=800
 height=600
-
+contador = 0
 
 #############-------Classes------##############
 
@@ -76,7 +76,15 @@ class Bolinha_assassina(pygame.sprite.Sprite):
     def move3(self):
         self.rect.y += self.vy
 
-
+class Bolaquepega(pygame.sprite.Sprite):
+    def __init__(self, imagem_amarelo, pos_x2, pos_y2):
+        pygame.sprite.Sprite.__init__(self)
+        
+        self.image = pygame.image.load(imagem_amarelo)
+        self.rect = self.image.get_rect() 
+        self.rect.x = pos_x2
+        self.rect.y = pos_y2
+        
 class Paredes(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
         super().__init__()
@@ -103,7 +111,7 @@ class Zona_segura(pygame.sprite.Sprite):
 pygame.init()
 tela = pygame.display.set_mode((800, 600), 0, 32)
 
-pygame.display.set_caption('JOGO')
+pygame.display.set_caption('O JOGO MAIS INSPER DO MUNDO')
 
 # carrega imagem de fundo 
 fundo = pygame.image.load("roxo-em-ingles.jpg").convert()
@@ -114,28 +122,43 @@ zona_group = pygame.sprite.Group()
 #zona = Zona_segura(10, 200, 150, 200)
 #zona_group.add(zona)
 
-zona = Zona_segura(640, 200, 150, 200)
+zona = Zona_segura(690, 200, 100, 200)
 zona_group.add(zona)
 
 # cria quadrado 
-quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+quadrado = Square("quadrado-vermelho-25X25.png", 25, 300)
 quadrado_group = pygame.sprite.Group()
 quadrado_group.add(quadrado)
 
 # cria bolinha
 bola_group = pygame.sprite.Group()
 
-bola = Bolinha_assassina("Bola-que-mata.jpg", 500, 500, 2)
+bola = Bolinha_assassina("bola-menor.png", 250, 500, 3)
 bola_group.add(bola)
 
-bola2 = Bolinha_assassina("Bola-que-mata.jpg", 475, 100, -2)
+bola2 = Bolinha_assassina("bola-menor.png", 325, 100, -2)
 bola_group.add(bola2)
 
-bola3 = Bolinha_assassina("Bola-que-mata.jpg", 450, 500, 2)
+bola3 = Bolinha_assassina("bola-menor.png", 400, 500, 3)
 bola_group.add(bola3)
 
-bola4 = Bolinha_assassina("Bola-que-mata.jpg", 425, 100, -2)
+bola4 = Bolinha_assassina("bola-menor.png", 475, 100, -3)
 bola_group.add(bola4)
+
+bola5 = Bolinha_assassina("bola-menor.png", 550, 100, 2)
+bola_group.add(bola5)
+
+bola6 = Bolinha_assassina("bola-menor.png", 625, 100, -3)
+bola_group.add(bola6)
+
+bolaP_group = pygame.sprite.Group()
+
+
+bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+bolaP_group.add(bolaP1)
+
+#bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+#bolaP_group.add(bolaP2)
 
 # cria parede
 parede_group = pygame.sprite.Group()
@@ -152,10 +175,7 @@ parede_group.add(parede)
 parede = Paredes(0, 590, 800, 10)
 parede_group.add(parede)
 
-
-
 relogio = pygame.time.Clock()
-
 
 # ===============   LOOPING PRINCIPAL   ===============
 rodando = True
@@ -167,25 +187,82 @@ while rodando:
       rodando = False            #executa a função de sistema "exit"
       
   if pygame.sprite.collide_rect(quadrado,bola):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
      
-  if pygame.sprite.collide_rect(quadrado,bola2):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+  elif pygame.sprite.collide_rect(quadrado,bola2):
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
   
-  if pygame.sprite.collide_rect(quadrado,bola3):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+  elif pygame.sprite.collide_rect(quadrado,bola3):
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)  
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
     
-  if pygame.sprite.collide_rect(quadrado,bola4):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+  elif pygame.sprite.collide_rect(quadrado,bola4):
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
+    
+  elif pygame.sprite.collide_rect(quadrado,bola5):
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
+     quadrado_group = pygame.sprite.Group()
+     quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
      
+  elif pygame.sprite.collide_rect(quadrado,bola6):
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
+     quadrado_group = pygame.sprite.Group()
+     quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
+     
+  elif pygame.sprite.collide_rect(quadrado,bolaP1):
+      bolaP1 = Bolaquepega("amarelo-pega.png", 800 ,300)
+      bolaP_group = pygame.sprite.Group()
+      bolaP_group.add(bolaP1)
+      contador += 1
+      
+  #elif pygame.sprite.collide_rect(quadrado,bolaP2):
+      #bolaP2 = Bolaquepega("amarelo-pega.png", 800 ,300)
+      #bolaP_group = pygame.sprite.Group()
+      #bolaP_group.add(bolaP2)
+      #contador += 1
   #if pygame.sprite.collide_rect(quadrado, parede):
       #quadrado = Square("quadrado-vermelho-25X25.png", pos_x, pos_y)
     
@@ -217,6 +294,14 @@ while rodando:
   bola4.move3()
   if bola4.rect.y < 10 or bola4.rect.y > 565:
       bola4.vy = -bola4.vy  
+     
+  bola5.move3()
+  if bola5.rect.y < 10 or bola5.rect.y > 565:
+      bola5.vy = -bola5.vy
+
+  bola6.move3()
+  if bola6.rect.y < 10 or bola6.rect.y > 565:
+      bola6.vy = -bola6.vy
     
     
   # Caso a bolinha chegue na segunda zona, vc VENCE e o jogo fecha
@@ -226,13 +311,14 @@ while rodando:
   # MUDAR PARA A PRÓXIMA FASE CASO CHEGUE NA ZONA 2
   if pygame.sprite.collide_rect(quadrado,zona):
       pygame.quit()
-      quit()
+      sys.exit('temporary solution')
 
 
   #gera saídas
   tela.blit(fundo, (0, 0))
   quadrado_group.draw(tela)
   bola_group.draw(tela)
+  bolaP_group.draw(tela)
   parede_group.draw(tela)
   zona_group.draw(tela)
   pygame.display.update()     #coloca a tela na janela

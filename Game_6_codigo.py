@@ -14,7 +14,7 @@ GREEN = (0, 200, 0)
 BLUE = (50, 50, 255)
 width=800
 height=600
-
+contador = 0
 
 #############-------Classes------##############
 
@@ -154,8 +154,11 @@ bola_group.add(bola6)
 bolaP_group = pygame.sprite.Group()
 
 
-bolaP = Bolaquepega("amarelo-pega.png", 400 , 150)
-bolaP_group.add(bolaP)
+bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+bolaP_group.add(bolaP1)
+
+#bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+#bolaP_group.add(bolaP2)
 
 # cria parede
 parede_group = pygame.sprite.Group()
@@ -187,32 +190,79 @@ while rodando:
      quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
      
-  if pygame.sprite.collide_rect(quadrado,bola2):
+  elif pygame.sprite.collide_rect(quadrado,bola2):
      quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
   
-  if pygame.sprite.collide_rect(quadrado,bola3):
+  elif pygame.sprite.collide_rect(quadrado,bola3):
      quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)  
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
     
-  if pygame.sprite.collide_rect(quadrado,bola4):
+  elif pygame.sprite.collide_rect(quadrado,bola4):
      quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
     
-  if pygame.sprite.collide_rect(quadrado,bola5):
+  elif pygame.sprite.collide_rect(quadrado,bola5):
      quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
      
-  if pygame.sprite.collide_rect(quadrado,bola6):
+  elif pygame.sprite.collide_rect(quadrado,bola6):
      quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+     bolaP1 = Bolaquepega("amarelo-pega.png", 430 , 300)
+     bolaP_group = pygame.sprite.Group()
+     bolaP_group.add(bolaP1)
+     #bolaP2 = Bolaquepega("amarelo-pega.png", 580 , 300)
+     #bolaP_group = pygame.sprite.Group()
+     #bolaP_group.add(bolaP2)
      
+  elif pygame.sprite.collide_rect(quadrado,bolaP1):
+      bolaP1 = Bolaquepega("amarelo-pega.png", 800 ,300)
+      bolaP_group = pygame.sprite.Group()
+      bolaP_group.add(bolaP1)
+      contador += 1
+      
+  #elif pygame.sprite.collide_rect(quadrado,bolaP2):
+      #bolaP2 = Bolaquepega("amarelo-pega.png", 800 ,300)
+      #bolaP_group = pygame.sprite.Group()
+      #bolaP_group.add(bolaP2)
+      #contador += 1
   #if pygame.sprite.collide_rect(quadrado, parede):
       #quadrado = Square("quadrado-vermelho-25X25.png", pos_x, pos_y)
     

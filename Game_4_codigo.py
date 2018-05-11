@@ -125,22 +125,22 @@ quadrado_group.add(quadrado)
 # cria bolinha
 bola_group = pygame.sprite.Group()
 
-bola = Bolinha_assassina("Bola-que-mata.jpg", 250, 500, 2)
+bola = Bolinha_assassina("bola-menor.png", 250, 500, 3)
 bola_group.add(bola)
 
-bola2 = Bolinha_assassina("Bola-que-mata.jpg", 325, 100, -2)
+bola2 = Bolinha_assassina("bola-menor.png", 325, 100, -2)
 bola_group.add(bola2)
 
-bola3 = Bolinha_assassina("Bola-que-mata.jpg", 400, 500, 3)
+bola3 = Bolinha_assassina("bola-menor.png", 400, 500, 3)
 bola_group.add(bola3)
 
-bola4 = Bolinha_assassina("Bola-que-mata.jpg", 475, 100, -3)
+bola4 = Bolinha_assassina("bola-menor.png", 475, 100, -3)
 bola_group.add(bola4)
 
-bola5 = Bolinha_assassina("Bola-que-mata.jpg", 550, 100, 2)
+bola5 = Bolinha_assassina("bola-menor.png", 550, 100, 2)
 bola_group.add(bola5)
 
-bola6 = Bolinha_assassina("Bola-que-mata.jpg", 625, 100, -2)
+bola6 = Bolinha_assassina("bola-menor.png", 625, 100, -3)
 bola_group.add(bola6)
 
 

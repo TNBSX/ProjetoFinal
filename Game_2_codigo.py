@@ -128,14 +128,18 @@ bola_group = pygame.sprite.Group()
 bola = Bolinha_assassina("Bola-que-mata.jpg", 500, 500, 2)
 bola_group.add(bola)
 
-bola2 = Bolinha_assassina("Bola-que-mata.jpg", 475, 100, -2)
+bola2 = Bolinha_assassina("Bola-que-mata.jpg", 350, 100, -2)
 bola_group.add(bola2)
 
-bola3 = Bolinha_assassina("Bola-que-mata.jpg", 450, 500, 2)
+bola3 = Bolinha_assassina("Bola-que-mata.jpg", 450, 500, -2)
 bola_group.add(bola3)
 
-bola4 = Bolinha_assassina("Bola-que-mata.jpg", 425, 100, -2)
+bola4 = Bolinha_assassina("Bola-que-mata.jpg", 550, 100, -2)
 bola_group.add(bola4)
+
+bola5 = Bolinha_assassina("Bola-que-mata.jpg", 400, 100, 2)
+bola_group.add(bola5)
+
 
 # cria parede
 parede_group = pygame.sprite.Group()
@@ -185,6 +189,11 @@ while rodando:
      quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
+    
+  if pygame.sprite.collide_rect(quadrado,bola5):
+     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado_group = pygame.sprite.Group()
+     quadrado_group.add(quadrado)
      
   #if pygame.sprite.collide_rect(quadrado, parede):
       #quadrado = Square("quadrado-vermelho-25X25.png", pos_x, pos_y)
@@ -217,6 +226,10 @@ while rodando:
   bola4.move3()
   if bola4.rect.y < 10 or bola4.rect.y > 565:
       bola4.vy = -bola4.vy  
+     
+  bola5.move3()
+  if bola5.rect.y < 10 or bola5.rect.y > 565:
+      bola5.vy = -bola5.vy
     
     
   # Caso a bolinha chegue na segunda zona, vc VENCE e o jogo fecha

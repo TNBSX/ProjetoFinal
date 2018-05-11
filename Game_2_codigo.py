@@ -106,7 +106,7 @@ tela = pygame.display.set_mode((800, 600), 0, 32)
 pygame.display.set_caption('JOGO')
 
 # carrega imagem de fundo 
-fundo = pygame.image.load("fundo-800X600.jpg").convert()
+fundo = pygame.image.load("roxo-em-ingles.jpg").convert()
 
 #cria zona segura
 zona_group = pygame.sprite.Group()

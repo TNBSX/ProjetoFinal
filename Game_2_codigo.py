@@ -17,7 +17,7 @@ height=600
 
 #############-------Classes------##############
 
-class square(pygame.sprite.Sprite):
+class Square(pygame.sprite.Sprite):
     def __init__(self, Quadrado_imagem, pos_x, pos_y):
         pygame.sprite.Sprite.__init__(self)
         #self.x = pos_x
@@ -60,7 +60,7 @@ class square(pygame.sprite.Sprite):
         #if col == True:
             #sys.exit()
             
-class bolinha_assassina(pygame.sprite.Sprite):
+class Bolinha_assassina(pygame.sprite.Sprite):
     def __init__(self, bolinha_imagem, pos_x2, pos_y2, vel_y):
         pygame.sprite.Sprite.__init__(self)
         
@@ -97,12 +97,12 @@ pygame.display.set_caption('JOGO')
 fundo = pygame.image.load("fundo-800X600.jpg").convert()
 
 # cria quadrado 
-quadrado = square("quadrado-vermelho-25X25.png", 100, 300)
+quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
 quadrado_group = pygame.sprite.Group()
 quadrado_group.add(quadrado)
 
 # cria bolinha
-bola = bolinha_assassina("bola-20X20.png", 500, 500, 1)
+bola = Bolinha_assassina("bola-20X20.png", 500, 500, 1)
 #bola2 = bolinha_assassina2("bola-20X20.png", 700, 200, randrange(-1, 1))
 
 bola_group = pygame.sprite.Group()
@@ -138,12 +138,12 @@ while rodando:
       rodando = False            #executa a função de sistema "exit"
       
   if pygame.sprite.collide_rect(quadrado,bola):
-     quadrado = square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
      
   #if pygame.sprite.collide_rect(quadrado, parede):
-      #quadrado = square("quadrado-vermelho-25X25.png", pos_x, pos_y)
+      #quadrado = Square("quadrado-vermelho-25X25.png", pos_x, pos_y)
     
   #move o quadrado pela tela
   pressed_keys = pygame.key.get_pressed() #pega teclas pressionadas

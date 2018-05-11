@@ -103,7 +103,7 @@ class Zona_segura(pygame.sprite.Sprite):
 pygame.init()
 tela = pygame.display.set_mode((800, 600), 0, 32)
 
-pygame.display.set_caption('JOGO')
+pygame.display.set_caption('O JOGO MAIS INSPER DO MUNDO')
 
 # carrega imagem de fundo 
 fundo = pygame.image.load("roxo-em-ingles.jpg").convert()
@@ -114,28 +114,35 @@ zona_group = pygame.sprite.Group()
 #zona = Zona_segura(10, 200, 150, 200)
 #zona_group.add(zona)
 
-zona = Zona_segura(640, 200, 150, 200)
+zona = Zona_segura(700, 200, 100, 200)
 zona_group.add(zona)
 
 # cria quadrado 
-quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+quadrado = Square("quadrado-vermelho-25X25.png", 25, 300)
 quadrado_group = pygame.sprite.Group()
 quadrado_group.add(quadrado)
 
 # cria bolinha
 bola_group = pygame.sprite.Group()
 
-bola = Bolinha_assassina("bola-20X20.png", 500, 500, 2)
+bola = Bolinha_assassina("Bola-que-mata.jpg", 250, 500, 2)
 bola_group.add(bola)
 
-bola2 = Bolinha_assassina("bola-20X20.png", 475, 100, -2)
+bola2 = Bolinha_assassina("Bola-que-mata.jpg", 325, 100, -2)
 bola_group.add(bola2)
 
-bola3 = Bolinha_assassina("bola-20X20.png", 450, 500, 2)
+bola3 = Bolinha_assassina("Bola-que-mata.jpg", 400, 500, 3)
 bola_group.add(bola3)
 
-bola4 = Bolinha_assassina("bola-20X20.png", 425, 100, -2)
+bola4 = Bolinha_assassina("Bola-que-mata.jpg", 475, 100, -3)
 bola_group.add(bola4)
+
+bola5 = Bolinha_assassina("Bola-que-mata.jpg", 550, 100, 2)
+bola_group.add(bola5)
+
+bola6 = Bolinha_assassina("Bola-que-mata.jpg", 625, 100, -2)
+bola_group.add(bola6)
+
 
 # cria parede
 parede_group = pygame.sprite.Group()
@@ -167,22 +174,32 @@ while rodando:
       rodando = False            #executa a função de sistema "exit"
       
   if pygame.sprite.collide_rect(quadrado,bola):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
      
   if pygame.sprite.collide_rect(quadrado,bola2):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
   
   if pygame.sprite.collide_rect(quadrado,bola3):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)  
     
   if pygame.sprite.collide_rect(quadrado,bola4):
-     quadrado = Square("quadrado-vermelho-25X25.png", 100, 300)
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
+     quadrado_group = pygame.sprite.Group()
+     quadrado_group.add(quadrado)
+    
+  if pygame.sprite.collide_rect(quadrado,bola5):
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
+     quadrado_group = pygame.sprite.Group()
+     quadrado_group.add(quadrado)
+     
+  if pygame.sprite.collide_rect(quadrado,bola6):
+     quadrado = Square("quadrado-vermelho-25X25.png", 50, 300)
      quadrado_group = pygame.sprite.Group()
      quadrado_group.add(quadrado)
      
@@ -217,6 +234,14 @@ while rodando:
   bola4.move3()
   if bola4.rect.y < 10 or bola4.rect.y > 565:
       bola4.vy = -bola4.vy  
+     
+  bola5.move3()
+  if bola5.rect.y < 10 or bola5.rect.y > 565:
+      bola5.vy = -bola5.vy
+
+  bola6.move3()
+  if bola6.rect.y < 10 or bola6.rect.y > 565:
+      bola6.vy = -bola6.vy
     
     
   # Caso a bolinha chegue na segunda zona, vc VENCE e o jogo fecha
@@ -226,7 +251,7 @@ while rodando:
   # MUDAR PARA A PRÓXIMA FASE CASO CHEGUE NA ZONA 2
   if pygame.sprite.collide_rect(quadrado,zona):
       pygame.quit()
-      quit()
+      sys.exit('temporary solution')
 
 
   #gera saídas

@@ -15,7 +15,8 @@ BLUE = (50, 50, 255)
 width=800
 height=600
 contador = 0
-velb = 1
+velb = 1 # controlador de velocidade das bolinhas
+
 #############-------Classes------##############
 
 class Square(pygame.sprite.Sprite):
@@ -286,19 +287,19 @@ while rodando:
 
 #move a bolinha
   bola.move3()
-  if bola.rect.y < 10 or bola.rect.y > 565:
+  if bola.rect.y < 10 or bola.rect.y > 575:
     bola.vy = - bola.vy 
     
   bola2.move3()
-  if bola2.rect.y < 0 or bola2.rect.y > 565:
+  if bola2.rect.y < 0 or bola2.rect.y > 575:
       bola2.vy = - bola2.vy
       
   bola3.move3()
-  if bola3.rect.y < 10 or bola3.rect.y > 565:
+  if bola3.rect.y < 10 or bola3.rect.y > 575:
       bola3.vy = - bola3.vy
   
   bola4.move3()
-  if bola4.rect.y < 10 or bola4.rect.y > 565:
+  if bola4.rect.y < 10 or bola4.rect.y > 575:
       bola4.vy = -bola4.vy  
      
   bola5.move3()
@@ -306,7 +307,7 @@ while rodando:
       bola5.vy = -bola5.vy
 
   bola6.move3()
-  if bola6.rect.y < 10 or bola6.rect.y > 590:
+  if bola6.rect.y < 10 or bola6.rect.y > 575:
       bola6.vy = -bola6.vy
     
     

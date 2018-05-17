@@ -13,12 +13,13 @@ import sys
 from pygame.locals import *
 from random import randrange
 
+
 GREEN = (0, 200, 0)
 BLUE = (50, 50, 255)
 width=800
 height=600
 contador = 0
-velb = 1   # controlador de velocidade das bolinhas
+velb = 3   # controlador de velocidade das bolinhas
 
 #############-------Classes------##############
 
@@ -87,6 +88,7 @@ class Bolaquepega(pygame.sprite.Sprite):
         
         self.image = pygame.image.load(imagem_amarelo)
         self.rect = self.image.get_rect() 
+        
         self.rect.x = pos_x2
         self.rect.y = pos_y2
         
@@ -114,6 +116,7 @@ class Zona_segura(pygame.sprite.Sprite):
 
 ###########-------Inicialização------###########
 pygame.init()
+pygame.mixer.init()
 tela = pygame.display.set_mode((800, 600), 0, 32)
 
 pygame.display.set_caption('O JOGO MAIS INSPER DO MUNDO')
@@ -163,7 +166,7 @@ bola_group.add(bola6)
 #bola9 = Bolinha_assassina("bola-menor.png", 475, 50, velb, 0) #anda no X 1 MAIS EM CIMA
 #bola_group.add(bola9)
 
-bola4 = Bolinha_assassina("bola-menor.png", 175, 140, velb,0) #anda no X 2 bolinha (de cima para baixo)
+bola4 = Bolinha_assassina("bola-menor.png", 175, 130, velb,0) #anda no X 2 bolinha (de cima para baixo)
 bola_group.add(bola4)
 
 bola11 = Bolinha_assassina("bola-menor.png", 475, 200, velb, 0) #anda no X 3 bolinha (de cima para baixo)
@@ -172,7 +175,7 @@ bola_group.add(bola11)
 bola3 = Bolinha_assassina("bola-menor.png", 175, 390, velb, 0) #anda no X 4 bolinha (de cima para baixo)
 bola_group.add(bola3)
 
-bola12 = Bolinha_assassina("bola-menor.png", 475, 450, velb, 0) #anda no X 5 bolinha (de cima para baixo)
+bola12 = Bolinha_assassina("bola-menor.png", 475, 451, velb, 0) #anda no X 5 bolinha (de cima para baixo)
 bola_group.add(bola12)
 
 #bola10 = Bolinha_assassina("bola-menor.png", 475, 550, velb, 0) #anda no X 6 MAIS EM BAIXO
@@ -208,7 +211,8 @@ parede_group.add(parede)
 
 
 relogio = pygame.time.Clock()
-
+coin = pygame.mixer.Sound("coin.wav")
+death = pygame.mixer.Sound("voldemort2.wav")
 # ===============   LOOPING PRINCIPAL   ===============
 rodando = True
 while rodando:
@@ -239,12 +243,15 @@ while rodando:
         bolaP3.rect.x = 430
         bolaP3.rect.y = 290
         
+        death.play(0)
+        
     #Jogador colide com 1 o marcador
   if pygame.sprite.collide_rect(quadrado, bolaP1):
         
         #Esconde marcador 1 encontrado
         bolaP1.rect.x = 1000
         bolaP1.rect.y = 1000
+        coin.play(0)
         contador += 1 #Adiciona ponto
         
     #Jogodor colide com 2 marcador...
@@ -253,6 +260,7 @@ while rodando:
         #Esconde marcador 2 encontrado
         bolaP2.rect.x = 1001
         bolaP2.rect.y = 1001
+        coin.play(0)
         contador += 1 #Adiciona ponto
         
       #Jogodor colide com 3 marcador...
@@ -261,6 +269,7 @@ while rodando:
         #Esconde marcador 2 encontrado
         bolaP3.rect.x = 1002
         bolaP3.rect.y = 1002
+        coin.play(0)
         contador += 1 #Adiciona ponto
         
   #if pygame.sprite.collide_rect(quadrado, parede):
@@ -270,11 +279,11 @@ while rodando:
   pressed_keys = pygame.key.get_pressed() #pega teclas pressionadas
   if pressed_keys[K_UP] and quadrado.rect.y > 110:
       quadrado.moveUp()
-  elif pressed_keys[K_DOWN] and quadrado.rect.y < 465:
+  if pressed_keys[K_DOWN] and quadrado.rect.y < 465:
       quadrado.moveDown() 
-  elif pressed_keys[K_LEFT] and quadrado.rect.x > 110:
+  if pressed_keys[K_LEFT] and quadrado.rect.x > 110:
       quadrado.moveLeft()
-  elif pressed_keys[K_RIGHT] and quadrado.rect.x < 665:
+  if pressed_keys[K_RIGHT] and quadrado.rect.x < 665:
       quadrado.moveRight()
 
 #move a bolinha

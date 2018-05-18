@@ -12,6 +12,7 @@ import pygame
 import sys
 from pygame.locals import *
 from random import randrange
+from matplotlib.pyplot import imread
 
 
 GREEN = (0, 200, 0)
@@ -19,13 +20,13 @@ BLUE = (50, 50, 255)
 width=800
 height=600
 contador = 0
-velb = 3   # controlador de velocidade das bolinhas
+velb = 4   # controlador de velocidade das bolinhas
 
 #############-------Classes------##############
 
 class Square(pygame.sprite.Sprite):
-    def __init__(self, Quadrado_imagem, pos_x, pos_y):
-        pygame.sprite.Sprite.__init__(self)
+    def _init_(self, Quadrado_imagem, pos_x, pos_y):
+        pygame.sprite.Sprite._init_(self)
         #self.x = pos_x
         #self.y = pos_y
         self.image = pygame.image.load(Quadrado_imagem)
@@ -67,8 +68,8 @@ class Square(pygame.sprite.Sprite):
             #sys.exit()
             
 class Bolinha_assassina(pygame.sprite.Sprite):
-    def __init__(self, bolinha_imagem, pos_x2, pos_y2, vel_x, vel_y):
-        pygame.sprite.Sprite.__init__(self)
+    def _init_(self, bolinha_imagem, pos_x2, pos_y2, vel_x, vel_y):
+        pygame.sprite.Sprite._init_(self)
         
         self.vx = vel_x
         self.vy = vel_y
@@ -83,8 +84,8 @@ class Bolinha_assassina(pygame.sprite.Sprite):
         self.rect.x += self.vx
 
 class Bolaquepega(pygame.sprite.Sprite):
-    def __init__(self, imagem_amarelo, pos_x2, pos_y2):
-        pygame.sprite.Sprite.__init__(self)
+    def _init_(self, imagem_amarelo, pos_x2, pos_y2):
+        pygame.sprite.Sprite._init_(self)
         
         self.image = pygame.image.load(imagem_amarelo)
         self.rect = self.image.get_rect() 
@@ -93,8 +94,8 @@ class Bolaquepega(pygame.sprite.Sprite):
         self.rect.y = pos_y2
         
 class Paredes(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height):
-        super().__init__()
+    def _init_(self, x, y, width, height):
+        super()._init_()
         self.image = pygame.Surface([width, height])
         self.image.fill(BLUE)
  
@@ -104,8 +105,8 @@ class Paredes(pygame.sprite.Sprite):
         
 
 class Zona_segura(pygame.sprite.Sprite):
-    def __init__(self, x, y, width, height):
-        super().__init__()
+    def _init_(self, x, y, width, height):
+        super()._init_()
         self.image = pygame.Surface([width, height])
         #self.image.fill(GREEN)
         
@@ -113,11 +114,56 @@ class Zona_segura(pygame.sprite.Sprite):
         self.rect.y = y
         self.rect.x = x
 
+class Button(pygame.sprite.Sprite):
+    def _init_(self, img, pos_x, pos_y):
+        height, width, channels = imread(img).shape
+        pygame.sprite.Sprite._init_(self)
+        self.image = pygame.image.load(img)
+        self.rect = self.image.get_rect()
+        self.rect.x = pos_x
+        self.rect.y = pos_y
+        self.x = [pos_x, pos_x + width]
+        self.y = [pos_y, pos_y + height]
 
 ###########-------Inicialização------###########
+        
 pygame.init()
-pygame.mixer.init()
+
+relogio = pygame.time.Clock()
+
 tela = pygame.display.set_mode((800, 600), 0, 32)
+menu_jogo = pygame.image.load('TELA.png').convert()
+menu_teste = pygame.transform.scale(menu_jogo, (width, height))
+tela.blit(menu_teste, (0,0))
+
+button = pygame.sprite.Group()
+playb = "play.png"
+quitb = "Exit_Button.png"
+quita = Button(quitb, 400, 250)
+play = Button(playb, 100, 250)
+button.add(play)
+button.add(quita)
+
+menu = True
+
+while menu:
+    
+    button.draw(tela)
+    
+    for event in pygame.event.get():  
+        if pygame.mouse.get_pressed():
+            if pygame.mouse.get_pressed()[0] == 1:
+                if pygame.mouse.get_pos()[0] in range(play.x[0], play.x[1]) and pygame.mouse.get_pos()[1] in range(play.y[0], play.y[1]):
+                    menu = False
+                    rodando = True
+                if pygame.mouse.get_pos()[0] in range(quita.x[0], quita.x[1]) and pygame.mouse.get_pos()[1] in range(quita.y[0], quita.y[1]):
+                    menu = False
+                    rodando = False
+    
+    pygame.display.update()        
+        
+pygame.mixer.init()
+#tela = pygame.display.set_mode((800, 600), 0, 32)
 
 pygame.display.set_caption('O JOGO MAIS INSPER DO MUNDO')
 
@@ -211,10 +257,13 @@ parede_group.add(parede)
 
 
 relogio = pygame.time.Clock()
+
 coin = pygame.mixer.Sound("coin.wav")
+#win =  pygame.mixer.Sound("bazinga.wav")
 death = pygame.mixer.Sound("voldemort2.wav")
+
 # ===============   LOOPING PRINCIPAL   ===============
-rodando = True
+#rodando = True
 while rodando:
   tempo = relogio.tick(200)
     

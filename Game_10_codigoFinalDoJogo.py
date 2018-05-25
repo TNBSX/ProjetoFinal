@@ -6,7 +6,7 @@ Created on Tue May 15 18:03:12 2018
 """
 
 
-# ఠిస్ ఐస్ ది బెస్ట్ గేమ్ ఎవర్, ది మోస్ట్ డిఫికల్ట్ వన్ 
+# ఠిస్ ఐస్ ది బెస్ట్ గేమ్ ఎవర్, ది మోస్ట్ డిఫికల్ట్ వన
 
 import pygame
 import sys
@@ -19,7 +19,7 @@ BLUE = (50, 50, 255)
 width=800
 height=600
 contador = 0
-velb = 3   # controlador de velocidade das bolinhas
+velb = 0   # controlador de velocidade das bolinhas
 
 #############-------Classes------##############
 
@@ -206,13 +206,14 @@ parede_group.add(parede)
 parede = Paredes(690, 100, 10, 400) #Parede da direita
 parede_group.add(parede)
 
-parede = Paredes(100, 490, 600, 10) #Parede de baixo
+parede = Paredes(100, 490, 600, 10) #Parede de baixo 
 parede_group.add(parede)
 
 
 relogio = pygame.time.Clock()
 coin = pygame.mixer.Sound("coin.wav")
 death = pygame.mixer.Sound("voldemort2.wav")
+
 # ===============   LOOPING PRINCIPAL   ===============
 rodando = True
 while rodando:

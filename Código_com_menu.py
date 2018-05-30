@@ -117,20 +117,20 @@ pygame.init()
 
 relogio = pygame.time.Clock()
 
-tela = pygame.display.set_mode((800, 600), 0, 32)
-menu_jogo = pygame.image.load('Tela inicio.png').convert()
+tela2 = pygame.display.set_mode((800, 600), 0, 32)
+menu_jogo = pygame.image.load("Menu.PNG").convert()
 menu_teste = pygame.transform.scale(menu_jogo, (width, height))
-tela.blit(menu_teste, (0,0))
+tela2.blit(menu_teste, (0,0))
 
 button = pygame.sprite.Group()
 playb = ("play.png")
-play = Button(playb, 100, 350)
+play = Button(playb, 350, 400)
 button.add(play)
 menu = True
 
 while menu:
     
-    button.draw(tela)
+    button.draw(tela2)
     pygame.display.update()
     
     if pygame.mouse.get_pressed():
@@ -139,7 +139,7 @@ while menu:
                 menu = False
                 rodando = True
     else:
-        menu=True
+        menu = True
     
 # ===============   LOOPING PRINCIPAL   ===============
 

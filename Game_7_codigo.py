@@ -15,7 +15,7 @@ BLUE = (50, 50, 255)
 width=800
 height=600
 contador = 0
-velb = 1 # controlador de velocidade das bolinhas
+velb = 5 # controlador de velocidade das bolinhas
 
 #############-------Classes------##############
 

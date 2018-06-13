@@ -18,7 +18,7 @@ WHITE = (255,255,255)
 width=800
 height=600
 contador = 0
-velb = 4   # controlador de velocidade das bolinhas
+velb = 3   # controlador de velocidade das bolinhas
 mortes = 0
 
 ###########-------Inicialização------###########
@@ -317,7 +317,7 @@ def Fase3():
         
     pygame.display.quit()
     
-    
+
 #Fase 2
 def Fase2():
     global rodando2
